@@ -1,0 +1,354 @@
+@use "sass:color";
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .brand {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    h1 {
+      font-family: $font-family-heading;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, $color-primary-dark, $color-secondary-dark);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: $spacing-xs;
+    }
+
+    p {
+      color: rgba($color-text-main, 0.7);
+      font-size: $font-size-sm;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: center;
+    margin-bottom: $spacing-xs;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: $spacing-xl;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    .formGroup {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      label {
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: var(--text-main);
+        margin-left: 2px;
+      }
+
+      .phoneInputWrapper {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba($color-primary, 0.2);
+        border-radius: $radius-md;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        padding-left: $spacing-sm;
+
+        &:focus-within {
+          background: rgba(255, 255, 255, 0.8);
+          border-color: $color-primary;
+          box-shadow: 0 0 0 4px rgba($color-primary, 0.1);
+        }
+
+        .countryCode {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #333;
+          padding-right: $spacing-sm;
+          border-right: 1px solid rgba(0,0,0,0.1);
+          margin-right: $spacing-sm;
+          
+          img { border-radius: 2px; }
+        }
+
+        input {
+          flex: 1;
+          border: none;
+          background: transparent;
+          padding: 0.75rem 0.5rem;
+          font-size: 14px;
+          
+          &:focus { outline: none; }
+        }
+      }
+
+      .labelRow {
+        @include flex-between;
+        
+        .forgotPassword {
+          font-size: 12px;
+          color: $color-primary;
+          text-decoration: none;
+          
+          &:hover { text-decoration: underline; }
+        }
+      }
+
+      input[type="email"],
+      input[type="password"],
+      input[type="text"],
+      input[type="tel"] {
+        &:not(.phoneInputWrapper input) {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          background: rgba(255, 255, 255, 0.5);
+          border: 1px solid rgba($color-primary, 0.1);
+          border-radius: $radius-md;
+          font-size: 14px;
+          transition: all 0.2s ease;
+          backdrop-filter: blur(4px);
+
+          &:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            border-color: $color-primary;
+            box-shadow: 0 0 0 4px rgba($color-primary, 0.1);
+          }
+        }
+      }
+
+      .errorMessage {
+        color: #ef4444;
+        font-size: 12px;
+        margin-top: 2px;
+        font-weight: 500;
+      }
+
+      .passwordWrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input { padding-right: 2.5rem; }
+
+        .passwordToggle {
+          position: absolute;
+          right: 0.75rem;
+          background: none;
+          border: none;
+          color: #666;
+          cursor: pointer;
+          @include flex-center;
+        }
+      }
+    }
+
+    .signInButton {
+      @include button-base($color-primary, #fff);
+      margin-top: $spacing-sm;
+      padding: 0.875rem;
+      font-size: 1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, $color-primary, $color-primary-dark);
+      box-shadow: 0 4px 15px rgba($color-primary, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba($color-primary, 0.35);
+      }
+
+      &:disabled {
+        opacity: 0.75;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2.5px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+    }
+
+    .secondaryButton {
+      @include button-base(#fff, $color-primary);
+      border: 1px solid rgba($color-primary, 0.2);
+      padding: 0.75rem;
+      font-size: 14px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.6);
+      
+      &:hover { background: #fff; }
+    }
+
+    .resendButton {
+      background: none;
+      border: none;
+      color: $color-primary;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      margin-top: $spacing-xs;
+      &:hover { text-decoration: underline; }
+    }
+
+    .linkRow {
+      text-align: center;
+      margin-top: $spacing-sm;
+      
+      .linkButton {
+        background: none;
+        border: none;
+        color: $color-primary;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover { text-decoration: underline; }
+      }
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .keepSignedIn {
+      margin-top: $spacing-sm;
+      @include flex-center;
+      
+      label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        input { accent-color: $color-primary; }
+        a { color: $color-primary; text-decoration: none; }
+      }
+    }
+  }
+
+  // Auth tabs - segmented control at bottom of card
+  .authTabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.07);
+    padding: 4px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 260px;
+    margin: $spacing-lg auto 0;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+
+    .tab {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border-radius: 50px;
+      text-align: center;
+
+      &.active {
+        background: $color-primary;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba($color-primary, 0.35);
+      }
+      
+      &:not(.active):hover {
+        color: $color-primary;
+      }
+
+      &:disabled { cursor: default; }
+    }
+  }
+
+  .proTip {
+    font-size: 11px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: $spacing-sm;
+
+    .icon {
+      font-weight: bold;
+      color: $color-primary;
+    }
+  }
+
+  .divider {
+    @include flex-center;
+    margin: $spacing-xl 0 $spacing-md;
+    position: relative;
+    width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    h5 {
+      position: relative;
+      background: #e8e5e2;
+      padding: 2px 14px;
+      color: #555;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+    }
+  }
+}
+
+.infoText {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+}
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

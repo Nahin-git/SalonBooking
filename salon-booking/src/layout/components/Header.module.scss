@@ -1,0 +1,66 @@
+.header {
+  @include flex-between;
+  padding: $spacing-md $spacing-2xl;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .searchContainer {
+    flex: 1;
+    
+    input {
+      width: 100%;
+      max-width: 320px;
+      padding: 0.625rem $spacing-lg;
+      border: 1px solid var(--border);
+      border-radius: $radius-full;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-size: $font-size-sm;
+      transition: all 0.3s ease;
+      
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+        background-color: var(--bg-card);
+      }
+    }
+  }
+
+  .userProfile {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .userName {
+        font-weight: $font-weight-bold;
+        font-family: $font-family-heading;
+        font-size: $font-size-sm;
+        color: var(--text-main);
+      }
+      .userRole {
+        font-size: 0.75rem;
+        color: $color-primary;
+        font-weight: $font-weight-medium;
+      }
+    }
+
+    .logoutButton {
+      @include button-outline($color-error);
+      padding: 0.5rem $spacing-md;
+      font-size: $font-size-sm;
+      border-radius: $radius-md;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+// ==========================================
+// Main SCSS Entry Point
+// ==========================================
+
+// Note: In Vite, we often inject _variables and _mixins globally 
+// via vite.config.ts so we don't need to manually import them in every component.
+// But we still import them here to establish base styles or output theme classes.
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'theme' as *;
+
+// CSS Reset / Global Element Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: var(--bg-main, $color-bg-main);
+  color: var(--text-main, $color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Setup root to default to light theme CSS variables
+:root {
+  @include theme(light);
+}
+
+// Basic typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-md;
+  color: var(--text-main, $color-text-main);
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+    color: $color-primary-dark;
+  }
+}

@@ -1,0 +1,45 @@
+@use "sass:map";
+@use "variables" as *;
+
+// ==========================================
+// SCSS Theming: Theming Mapping and Configs
+// ==========================================
+
+// If you want a more complex theme mechanism using CSS custom properties 
+// generated from SCSS loops or direct classes, you manage it here.
+
+$themes: (
+  light: (
+    bg-main: $color-bg-main,
+    bg-card: $color-bg-card,
+    text-main: $color-text-main,
+    text-muted: $color-text-muted,
+    border: $color-border
+  ),
+  dark: (
+    bg-main: #0f172a,
+    bg-card: #1e293b,
+    text-main: #f8fafc,
+    text-muted: #94a3b8,
+    border: #334155
+  )
+);
+
+@mixin theme($theme-name) {
+  $theme-map: map.get($themes, $theme-name);
+  
+  --bg-main: #{map.get($theme-map, bg-main)};
+  --bg-card: #{map.get($theme-map, bg-card)};
+  --text-main: #{map.get($theme-map, text-main)};
+  --text-muted: #{map.get($theme-map, text-muted)};
+  --border: #{map.get($theme-map, border)};
+}
+
+// Generate theme classes
+.theme-light {
+  @include theme(light);
+}
+
+.theme-dark {
+  @include theme(dark);
+}

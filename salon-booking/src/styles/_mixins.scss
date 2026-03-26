@@ -1,0 +1,109 @@
+@use "sass:color";
+@use "variables" as *;
+
+// ==========================================
+// SCSS Mixins: Reusable Design Patterns
+// ==========================================
+
+// Flex Center Mixin
+@mixin flex-center($direction: row) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+// Flex Between Mixin
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Global Button Mixin
+@mixin button-base($bg-color: $color-primary, $text-color: #fff) {
+  @include flex-center;
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 0.75rem $spacing-xl;
+  border-radius: $radius-full;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-heading;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba($bg-color, 0.39);
+
+  &:hover {
+    background-color: color.adjust($bg-color, $lightness: -10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($bg-color, 0.23);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+// Primary and Secondary Button variants
+@mixin button-primary {
+  @include button-base($color-primary, #fff);
+}
+
+@mixin button-secondary {
+  @include button-base($color-secondary, #fff);
+}
+
+@mixin button-outline($color: $color-primary) {
+  @include flex-center;
+  background-color: transparent;
+  color: $color;
+  padding: 0.5rem $spacing-lg;
+  border-radius: $radius-full;
+  border: 1px solid rgba($color, 0.3);
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba($color, 0.05);
+    border-color: $color;
+  }
+}
+
+// Glassmorphism Mixin
+@mixin glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: $shadow-lg;
+}
+
+// Card Layout Mixin
+@mixin card {
+  @include glass;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-glow;
+  }
+}
+
+// Truncate Text Mixin (Handles text overflow with ellipsis)
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
